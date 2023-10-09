@@ -1,0 +1,285 @@
+﻿1)
+def menu():
+    continuar=1
+
+    while continuar:
+        continuar = int(
+            input("0. Sair\n"+
+                  "1. Exibir lista de alunos com suas notas (cada aluno tem uma nota)\n"+
+                  "2. Inserir aluno e nota\n"+
+                  "3. Alterar a nota de um aluno\n"+
+                  "4. Consultar nota de um aluno específico\n"+
+                  "5. Apagar um aluno da lista\n"+
+                  "6. Dar a média da turma\n"))
+        if continuar==1:
+            exibir()
+        elif continuar == 2:
+            inserir()
+        elif continuar == 3:
+            alterar()
+        elif continuar == 4:
+            consultar()
+        elif continuar == 5:
+            apagar()
+        elif continuar == 6:
+            media()
+        elif continuar == 0:
+            print("Encerrando programa")
+        else:
+            print("Opção inválida")
+        
+def exibir():
+    for nome in alunos.keys():
+        print("Nome: ", nome, " - Nota: ", alunos[nome])
+        
+def inserir():
+    nome = input("Digite o nome do aluno: ")
+    nota = float(input("Nota dele: "))
+
+    if alunos.get(nome):
+        print("Ja existe o aluno ",nome)
+    else:
+        alunos[nome] = nota
+    
+def alterar():
+    nome = input("Aluno a mudar a nota: ")
+    nota = float(input("Nova nota     : "))
+
+    if nome in alunos.keys():
+        alunos[nome] = nota
+    else:
+        print("Não existe esse aluno")
+        
+def consultar():
+    nome = input("Digite o nome do aluno: ")
+
+    if alunos.get(nome):
+        print("Nota de ",nome, ": ", alunos[nome])
+    else:
+        print("Nao existe tal aluno")
+    
+def apagar():
+    nome = input("Apagar que aluno: ")
+
+    if alunos.get(nome):
+        alunos.pop(nome)
+    else:
+        print("Não existe o aluno ",nome)
+        
+def media():
+    soma = 0
+    for count in alunos.values():
+        soma += count
+    print("Média dos alunos: %.2f" % (soma / len(alunos) ))
+
+alunos = {}
+menu()
+
+
+
+2)
+
+
+
+3)
+ficha = list()
+while True:
+    nome = str(input("Insira um nome: "))
+    sexo = str(input("Insira seu sexo [M/F]: "))
+    nota1 = float(input("Insira a nota 1: "))
+    nota2 = float(input("Insira a nota 2: "))
+    nota3 = float(input("Insira a nota 3: "))
+    media = (nota1 + nota2 + nota3) / 3
+    ficha.append([nome, sexo, [nota1, nota2, nota3], media])
+    resposta = str(input("Quer continuar? [S/N]"))
+    if resposta in 'Nn':
+        break
+
+
+4)
+# Dicionário de estudantes (substitua com seus próprios dados)
+estudantes = {
+    'João': {'idade': 20, 'curso': 'Engenharia'},
+    'Maria': {'idade': 22, 'curso': 'Ciência da Computação'},
+    'Pedro': {'idade': 21, 'curso': 'Medicina'},
+    'Ana': {'idade': 19, 'curso': 'Administração'}
+}
+
+# Função para procurar estudantes pelo nome
+def procurar_estudante(nome):
+    if nome in estudantes:
+        return estudantes[nome]
+    else:
+        return None
+
+# Programa principal
+while True:
+    nome_procurado = input("Digite o nome do estudante que deseja procurar (ou 'sair' para sair): ")
+    
+    if nome_procurado.lower() == 'sair':
+        break
+    
+    estudante = procurar_estudante(nome_procurado)
+    
+    if estudante:
+        print(f"Informações sobre {nome_procurado}:")
+        print(f"Idade: {estudante['idade']} anos")
+        print(f"Curso: {estudante['curso']}")
+    else:
+        print(f"{nome_procurado} não encontrado na lista de estudantes.")
+
+5)
+# Função para carregar o dicionário de estudantes de um arquivo
+def carregar_dicionario_arquivo(nome_arquivo):
+    try:
+        with open(nome_arquivo, 'r') as arquivo:
+            dados = json.load(arquivo)
+        return dados
+    except FileNotFoundError:
+        return {}
+
+# Função para salvar o dicionário de estudantes em um arquivo
+def salvar_dicionario_arquivo(nome_arquivo, dados):
+    with open(nome_arquivo, 'w') as arquivo:
+        json.dump(dados, arquivo, indent=4)
+
+# Função para remover um estudante do dicionário com base no nome
+def remover_estudante(dicionario, nome_estudante):
+    if nome_estudante in dicionario:
+        del dicionario[nome_estudante]
+        print(f"{nome_estudante} removido com sucesso!")
+    else:
+        print(f"{nome_estudante} não encontrado no dicionário.")
+
+# Nome do arquivo que contém o dicionário de estudantes
+nome_arquivo = 'estudantes.json'
+
+
+
+6)
+# Lista de idades dos estudantes
+idades = [18, 20, 22, 19, 21]
+
+# Calcula a média das idades
+media_idades = sum(idades) / len(idades)
+
+# Mostra a média na tela
+print("A idade média dos estudantes é:", media_idades)
+
+7)
+# Dicionário que relaciona os cursos aos estudantes matriculados
+cursos = {
+    'Curso A': ['Estudante 1', 'Estudante 2', 'Estudante 3'],
+    'Curso B': ['Estudante 4', 'Estudante 5'],
+    'Curso C': ['Estudante 6', 'Estudante 7', 'Estudante 8'],
+}
+
+# Loop para contar e mostrar a contagem de estudantes em cada curso
+for curso, estudantes in cursos.items():
+    quantidade_estudantes = len(estudantes)
+    print(f'O curso {curso} tem {quantidade_estudantes} estudantes matriculados.')
+
+8)
+# Função para carregar contatos de um arquivo JSON
+def carregar_contatos():
+    try:
+        with open("contatos.json", "r") as arquivo:
+            contatos = json.load(arquivo)
+    except FileNotFoundError:
+        contatos = {}
+    return contatos
+
+# Função para salvar contatos em um arquivo JSON
+def salvar_contatos(contatos):
+    with open("contatos.json", "w") as arquivo:
+        json.dump(contatos, arquivo, indent=4)
+
+# Função para adicionar um novo contato
+def adicionar_contato(contatos, nome, telefone):
+    contatos[nome] = telefone
+
+# Função para visualizar todos os contatos
+def visualizar_contatos(contatos):
+    if not contatos:
+        print("Nenhum contato na agenda.")
+    else:
+        print("Lista de Contatos:")
+        for nome, telefone in contatos.items():
+            print(f"Nome: {nome}, Telefone: {telefone}")
+
+# Função para atualizar um contato existente
+def atualizar_contato(contatos, nome, novo_telefone):
+    if nome in contatos:
+        contatos
+
+9)
+# Inicialize um dicionário vazio para registrar as compras
+compras = {}
+
+def adicionar_produto():
+    nome_produto = input("Digite o nome do produto: ")
+    preco_produto = float(input("Digite o preço do produto: "))
+    
+    # Verifica se o produto já existe no dicionário
+    if nome_produto in compras:
+        print("Produto já existe. Atualizando o preço.")
+    compras[nome_produto] = preco_produto
+    print(f"{nome_produto} foi adicionado à lista de compras.")
+
+def calcular_total():
+    total = sum(compras.values())
+    print(f"O valor total das compras é: R${total:.2f}")
+
+while True:
+    print("\nOpções:")
+    print("1 - Adicionar produto")
+    print("2 - Calcular total das compras")
+    print("3 - Sair")
+    
+    escolha = input("Escolha uma opção: ")
+    
+    if escolha == "1":
+        adicionar_produto()
+    elif escolha == "2":
+        calcular_total()
+    elif escolha == "3":
+        break
+    else:
+        print("Opção inválida. Por favor, escolha uma opção válida.")
+
+10)
+# Crie um dicionário vazio para armazenar as compras
+compras = {}
+
+def adicionar_produto():
+    nome = input("Digite o nome do produto: ")
+    preco = float(input("Digite o preço do produto: "))
+    compras[nome] = preco
+    print(f"{nome} foi adicionado às compras.")
+
+def exportar_para_csv():
+    nome_arquivo = input("Digite o nome do arquivo CSV para exportar: ")
+    
+    with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+        escritor_csv = csv.writer(arquivo_csv)
+        for produto, preco in compras.items():
+            escritor_csv.writerow([produto, preco])
+    
+    print(f"Os dados foram exportados para {nome_arquivo}.")
+
+while True:
+    print("\nOpções:")
+    print("1 - Adicionar produto")
+    print("2 - Exportar para CSV")
+    print("3 - Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == '1':
+        adicionar_produto()
+    elif opcao == '2':
+        exportar_para_csv()
+    elif opcao == '3':
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
